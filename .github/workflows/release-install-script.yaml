@@ -20,7 +20,6 @@ on:
         description: the R2 bucket to upload the install script to
         required: false
         default: 'oss-install'
-
     secrets:
       # cloudflare R2 credentials
       R2_INSTALL_ACCESS_KEY_ID:
@@ -35,9 +34,8 @@ jobs:
     name: "Upload"
     runs-on: ubuntu-latest
     steps:
-
       # checkout the specific tag to upload the install script for (this also validates the tag exists)
-      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - uses: actions/checkout@v6
         with:
           persist-credentials: false
           ref: ${{ inputs.tag }}
@@ -86,7 +84,6 @@ jobs:
           BUCKET: ${{ inputs.r2-bucket }}
           ENDPOINT: ${{ secrets.R2_ENDPOINT }}
         run: |
-          
           aws s3 cp install.sh s3://${BUCKET}/${PROJECT_NAME}/${TAG}/install.sh \
             --endpoint-url=${ENDPOINT} \
             --content-type "text/plain"
