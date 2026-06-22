@@ -35,7 +35,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       # checkout the specific tag to upload the install script for (this also validates the tag exists)
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           persist-credentials: false
           ref: ${{ inputs.tag }}
